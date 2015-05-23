@@ -16,13 +16,18 @@ def play( filename ):
     p = GPIO.PWM( pin, 0.5)
     p.start(1)
     for note in getTune( filename ):
-        p.ChangeFrequency( note[0] )
+        if( note[0] > 10 ):
+            p.ChangeFrequency( note[0] )
+        else:
+            p.stop()
         t = time.time()
         stopt = note[1]*speed - 0.01
         while (time.time() - t) < (stopt):
             if not GPIO.input( buttonpin ):
                 return False
             time.sleep( 0.05 )
+        if( note[0] <= 10 ):
+            p.start(1)
     p.stop()
     return True
 
