@@ -11,11 +11,11 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup( pin, GPIO.OUT)
 GPIO.setup( buttonpin, GPIO.IN, pull_up_down=GPIO.PUD_UP )
 
-def play(tune, tempo):
-    speed = 60 / tempo
+def play( filename ):
+    speed = 60 / getTempo( filename )
     p = GPIO.PWM( pin, 0.5)
     p.start(1)
-    for note in tune:
+    for note in getTune( filename ):
         p.ChangeFrequency( note[0] )
         t = time.time()
         stopt = note[1]*speed - 0.01
@@ -37,7 +37,7 @@ def getTempo(filename):
         return data['tempo']
 
 try:
-    while play( getTune('melody.json'), getTempo('melody.json')):
+    while play( 'tetris.json' ):
         time.sleep(1)
 except KeyboardInterrupt:
     pass
