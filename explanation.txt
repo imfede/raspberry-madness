@@ -1,0 +1,9 @@
+The 'pin' drive the base of a bjt with an adequate resistance (4.7k)
+the collector is fed directly from (1.5 * 4) V DC
+The emitter goes in the + pin of the buzzer
+The other pin of the buzzer is grounded via a low R (4 parallel 390)
+
+the 'buttonpin' goes directly in the button
+the other pin of the button is grounded (no R)
+
+Of course the external alimentation and the board must have a common ground
